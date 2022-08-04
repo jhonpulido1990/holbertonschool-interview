@@ -7,12 +7,11 @@ each box may contain keys to the other boxes.
 
 def canUnlockAll(boxes):
     """Write a method that determines if all the boxes can be opened."""
-    numberlist = []
-    set_list = []
-    for x in range(len(boxes)):
-        if len(boxes[x]) == 0 and (n - 1) != x:
-            return False
-        for i in boxes[x]:
-            numberlist.append(i)
-    set_list = [*set(numberlist)]
-    return sorted(set_list) == list(range(min(set_list), max(set_list) + 1))
+    key = [0]
+    for mykey in key:
+        for let_key in boxes[mykey]:
+            if let_key not in key and let_key < len(boxes):
+                key.append(let_key)
+    if len(key) == len(boxes):
+        return True
+    return False
