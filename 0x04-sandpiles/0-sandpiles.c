@@ -13,8 +13,8 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 	sum_sandpile(grid1, grid2);
 
-	 while (!valid_sandpaile(grid1))
-	 {
+	while (!valid_sandpaile(grid1))
+	{
 		print_sandpile(grid1);
 		funt_sandpaile(grid1);
 	}
@@ -77,6 +77,11 @@ void print_sandpile(int grid[3][3])
 		printf("\n");
 	}
 }
+
+/**
+ * funt_sandpaile - change in array
+ * @grid1: input array
+ */
 
 void funt_sandpaile(int grid1[3][3])
 {
