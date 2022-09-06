@@ -21,7 +21,7 @@ int is_palindrome(listint_t **head)
 		current = current->next;
 		count++;
 	};
-	
+
 	pos_end = count - 1;
 	count = count / 2;
 	while (pos_init <= count)
