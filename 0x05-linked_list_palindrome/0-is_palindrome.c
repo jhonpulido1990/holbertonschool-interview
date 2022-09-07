@@ -1,34 +1,51 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
+#include <stddef.h>
 
 /**
  * is_palindrome - checks if a singly linked list is a palindrome
- * @head: likend list
- * Return: 0 or 1
+ * @head: double pointer to the first node of a singly linked list
+ *
+ * Return: 0 if not palindrome, 1 if palindrome
  */
 
 int is_palindrome(listint_t **head)
 {
-	int count = 0, pos_end = 0, pos_init = 0, array[1024];
-	const listint_t *current = *head;
-
-	if (head == NULL || *head == NULL)
+	/* if not given valid pointer (no list), return 0 */
+	if (head == NULL)
+		return (0);
+	/* if linked list is empty, return 1 */
+	if (*head == NULL)
 		return (1);
-	while (current != NULL)
-	{
-		array[count] = current->n;
-		current = current->next;
-		count++;
-	};
+	/* otherwise, use recursive palindrome_check function */
+	return (palindrome_check(head, *head));
+}
 
-	pos_end = count - 1;
-	count = count / 2;
-	while (pos_init <= count)
+/**
+ * palindrome_check - checks is list is a palindrome recursively
+ * @head: double pointer to beginning of list
+ * @mover: single pointer to list to move to end
+ *
+ * Return: 0 if not palindrome, 1 if palindrome
+ */
+int palindrome_check(listint_t **head, listint_t *mover)
+{
+	/* move pointer to the end of the linked list */
+	if (mover->next)
 	{
-		if (array[pos_init] != array[pos_end])
+		/* if return is true, move front pointer forward */
+		/* moving head to next node will allow to check against end */
+		/*   when recurisively working back up through the stack */
+		if (palindrome_check(head, mover->next))
+			(*head) = (*head)->next;
+		/* otherwise, indicate already failed check */
+		else
 			return (0);
-		pos_end--, pos_init++;
 	}
-	return (1);
+	/* check if front pointer matches end pointer */
+	if ((*head)->n == mover->n)
+		/* if true, return success to move up stack which will move */
+		/*   front pointer forward and end pointer backward */
+		return (1);
+	/* otherwise, indicate up through the stack that failed check */
+	return (0);
 }
