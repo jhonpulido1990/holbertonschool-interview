@@ -3,8 +3,18 @@
 Write a script that reads stdin line
 by line and computes metrics:
 """
-
 import sys
+
+
+def print_list():
+    """
+    Total file size: File size: <total size>
+    format: <status code>: <number>
+    """
+    for key in sorted(statecode.keys()):
+        if statecode[key] > 0:
+            print(f"{key}: {statecode[key]}")
+
 
 if __name__ == "__main__":
     COUNT = 1
@@ -12,15 +22,6 @@ if __name__ == "__main__":
     statecode = {"200": 0, "301": 0, "400": 0,
                  "401": 0, "403": 0, "404": 0,
                  "405": 0, "500": 0}
-
-    def print_list():
-        """
-        Total file size: File size: <total size>
-        format: <status code>: <number>
-        """
-        for key in sorted(statecode.keys()):
-            if statecode[key] > 0:
-                print(f"{key}: {statecode[key]}")
 
     try:
         for line in sys.stdin:
