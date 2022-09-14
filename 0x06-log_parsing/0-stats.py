@@ -28,11 +28,14 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            getdata = line.split(" ")
-            SIZEFILE += int(getdata[8])
-            key_statucode = getdata[7]
-            if key_statucode in statecode:
-                statecode[key_statucode] += 1
+            try:
+                getdata = line.split(" ")
+                SIZEFILE += int(getdata[8])
+                key_statucode = getdata[7]
+                if key_statucode in statecode:
+                    statecode[key_statucode] += 1
+            except:
+                pass;
             if COUNT % 10 == 0:
                 print("File size: {}".format(SIZEFILE))
                 print_list()
