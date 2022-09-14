@@ -6,6 +6,13 @@ by line and computes metrics:
 import sys
 
 
+COUNT = 1
+SIZEFILE = 0
+statecode = {"200": 0, "301": 0, "400": 0,
+             "401": 0, "403": 0, "404": 0,
+             "405": 0, "500": 0}
+
+
 def print_list():
     """
     Total file size: File size: <total size>
@@ -13,15 +20,11 @@ def print_list():
     """
     for key in sorted(statecode.keys()):
         if statecode[key] > 0:
-            print(f"{key}: {statecode[key]}")
+            print("{}: {}".format(key, statecode[key]))
 
 
 if __name__ == "__main__":
-    COUNT = 1
-    SIZEFILE = 0
-    statecode = {"200": 0, "301": 0, "400": 0,
-                 "401": 0, "403": 0, "404": 0,
-                 "405": 0, "500": 0}
+
 
     try:
         for line in sys.stdin:
@@ -31,12 +34,12 @@ if __name__ == "__main__":
             if key_statucode in statecode:
                 statecode[key_statucode] += 1
             if COUNT % 10 == 0:
-                print(f"File size: {SIZEFILE}")
+                print("File size: {}".format(SIZEFILE))
                 print_list()
             COUNT += 1
     except KeyboardInterrupt:
-        print(f"File size: {SIZEFILE}")
+        print("File size: {}".format(SIZEFILE))
         print_list()
         raise
-    print(f"File size: {SIZEFILE}")
+    print("File size: {}".format(SIZEFILE))
     print_list()
