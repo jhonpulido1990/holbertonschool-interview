@@ -6,7 +6,6 @@ by line and computes metrics:
 import sys
 
 
-COUNT = 0
 SIZEFILE = 0
 statecode = {"200": 0, "301": 0, "400": 0,
              "401": 0, "403": 0, "404": 0,
@@ -25,6 +24,7 @@ def print_list():
 
 
 if __name__ == "__main__":
+    COUNT = 0
     try:
         for line in sys.stdin:
             try:
