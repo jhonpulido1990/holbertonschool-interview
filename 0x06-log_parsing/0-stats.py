@@ -38,6 +38,4 @@ if __name__ == "__main__":
                 print_list()
             COUNT += 1
     except KeyboardInterrupt:
-        print_list()
-        raise
-    print_list()
+        pass;
