@@ -38,4 +38,8 @@ if __name__ == "__main__":
                 print_list()
             COUNT += 1
     except KeyboardInterrupt:
-        pass;
+        print("File size: {}".format(SIZEFILE))
+        print_list()
+        raise
+    print("File size: {}".format(SIZEFILE))
+    print_list()
