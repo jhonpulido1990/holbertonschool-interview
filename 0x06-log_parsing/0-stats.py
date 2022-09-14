@@ -3,7 +3,7 @@
 Write a script that reads stdin line
 by line and computes metrics:
 """
-import sys
+from sys import stdin
 
 SIZEFILE = 0
 
@@ -26,7 +26,7 @@ def print_list():
 if __name__ == "__main__":
     COUNT = 0
     try:
-        for line in sys.stdin:
+        for line in stdin:
             try:
                 getdata = line.split()
                 SIZEFILE += int(getdata[8])
