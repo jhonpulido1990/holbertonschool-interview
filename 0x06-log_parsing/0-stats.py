@@ -6,7 +6,7 @@ by line and computes metrics:
 from sys import stdin
 
 
-statecode = {
+state_code = {
     "200": 0,
     "301": 0,
     "400": 0,
@@ -21,13 +21,11 @@ size = 0
 
 
 def print_list():
-    """
-    Total file size:
-    """
+    """Total file size"""
     print("File size: {}".format(size))
-    for key in sorted(statecode.keys()):
-        if statecode[key]:
-            print("{}: {}".format(key, statecode[key]))
+    for key in sorted(state_code.keys()):
+        if state_code[key]:
+            print("{}: {}".format(key, state_code[key]))
 
 
 if __name__ == "__main__":
@@ -38,8 +36,8 @@ if __name__ == "__main__":
                 getdata = line.split()
                 size += int(getdata[8])
                 key_statucode = getdata[7]
-                if key_statucode in statecode:
-                    statecode[key_statucode] += 1
+                if key_statucode in state_code:
+                    state_code[key_statucode] += 1
             except:
                 pass
             if count == 9:
