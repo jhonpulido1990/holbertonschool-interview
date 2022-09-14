@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 if key_statucode in statecode:
                     statecode[key_statucode] += 1
             except:
-                pass;
+                pass
             if COUNT == 9:
                 print_list()
                 COUNT = -1
