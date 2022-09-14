@@ -5,11 +5,12 @@ by line and computes metrics:
 """
 from sys import stdin
 
-SIZEFILE = 0
 
 statecode = {"200": 0, "301": 0, "400": 0,
              "401": 0, "403": 0, "404": 0,
              "405": 0, "500": 0}
+
+SIZEFILE = 0
 
 
 def print_list():
