@@ -18,6 +18,7 @@ def print_list():
     Total file size: File size: <total size>
     format: <status code>: <number>
     """
+    print("File size: {}".format(SIZEFILE))
     for key in sorted(statecode.keys()):
         if statecode[key] > 0:
             print("{}: {}".format(key, statecode[key]))
@@ -37,12 +38,9 @@ if __name__ == "__main__":
             except:
                 pass;
             if COUNT % 10 == 0:
-                print("File size: {}".format(SIZEFILE))
                 print_list()
             COUNT += 1
     except KeyboardInterrupt:
-        print("File size: {}".format(SIZEFILE))
         print_list()
         raise
-    print("File size: {}".format(SIZEFILE))
     print_list()
