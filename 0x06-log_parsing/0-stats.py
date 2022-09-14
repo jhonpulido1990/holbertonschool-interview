@@ -34,8 +34,8 @@ if __name__ == "__main__":
         for line in stdin:
             try:
                 getdata = line.split()
-                size += int(getdata[8])
-                key_statucode = getdata[7]
+                size += int(getdata[-1])
+                key_statucode = getdata[-2]
                 if key_statucode in state_code:
                     state_code[key_statucode] += 1
             except:
