@@ -15,8 +15,7 @@ SIZEFILE = 0
 
 def print_list():
     """
-    Total file size: File size: <total size>
-    format: <status code>: <number>
+    Total file size:
     """
     print("File size: {}".format(SIZEFILE))
     for key in sorted(statecode.keys()):
