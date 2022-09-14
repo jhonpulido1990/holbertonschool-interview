@@ -6,7 +6,7 @@ by line and computes metrics:
 import sys
 
 
-COUNT = 1
+COUNT = 0
 SIZEFILE = 0
 statecode = {"200": 0, "301": 0, "400": 0,
              "401": 0, "403": 0, "404": 0,
@@ -25,8 +25,6 @@ def print_list():
 
 
 if __name__ == "__main__":
-
-
     try:
         for line in sys.stdin:
             try:
@@ -37,8 +35,9 @@ if __name__ == "__main__":
                     statecode[key_statucode] += 1
             except:
                 pass;
-            if COUNT % 10 == 0:
+            if COUNT == 9:
                 print_list()
+                COUNT = -1
             COUNT += 1
     except KeyboardInterrupt:
         print_list()
