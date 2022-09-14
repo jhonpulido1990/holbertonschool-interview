@@ -20,7 +20,7 @@ def print_list():
     print("File size: {:d}".format(SIZEFILE))
     for key in sorted(statecode.keys()):
         if statecode[key]:
-            print("{}: {}".format(key, statecode[key]))
+            print("{}: {:d}".format(key, statecode[key]))
 
 
 if __name__ == "__main__":
