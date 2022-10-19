@@ -1,5 +1,11 @@
 #include "slide_line.h"
-
+/**
+ * slide_line - Write a function that slides and merges an array of integers
+ * @line: line
+ * @size: size data
+ * @direction: direction line
+ * Return: 1 or 0
+ */
 int slide_line(int *line, size_t size, int direction)
 {
 	int *place_here = NULL;
@@ -24,17 +30,13 @@ int slide_line(int *line, size_t size, int direction)
 				{
 					*place_here = *left * 2;
 					if (place_here != left)
-					{
 						*left = 0;
-					}
 					*right = 0;
 					place_here++;
 					break;
 				}
 				else
-				{
 					right++;
-				}
 			}
 			left++;
 		}
