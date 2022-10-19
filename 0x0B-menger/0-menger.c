@@ -29,7 +29,8 @@ void menger(int level)
 				if (d)
 				{
 					printf(" ");
-				} else
+				}
+				else
 				{
 					printf("#");
 				}
