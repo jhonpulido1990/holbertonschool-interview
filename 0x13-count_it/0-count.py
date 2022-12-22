@@ -1,53 +1,42 @@
 #!/usr/bin/python3
-""" 0. Count it!
-"""
+"""This module contains the count_words function"""
+
 import requests
 
 
-def hot_dict_fill(response, word_list, hot_dict, after):
-    """ Fill hot dict increment count words
-    """
-    titles = response.json().get("data").get("children")
-    for title in titles:
-        for hot_word in word_list:
-            title_post = title.get("data").get("title")
-            if title_post:
-                words_in_title = title_post.split()
-                for word_title in words_in_title:
-                    if hot_word.lower() == word_title.lower():
-                        hot_dict[hot_word] += 1
-    if not after:
-        for k, v in sorted(hot_dict.items(),
-                           key=lambda items: items[1],
-                           reverse=True):
-            if v != 0:
-                print("{}: {}".format(k, v))
+def get_articles(sub, w, wd, wd_r, a="",):
+    """ Get articles """
+    url = "https://www.reddit.com/r/{}".format(sub)
+    url = "{}/hot.json?limit=100&after={}".format(url, a)
+    response = requests.get(url, allow_redirects=False,
+                            headers={'User-agent': 'Holberton'})
+    if response.status_code != 200:
+        return None
+    articles = response.json()["data"]["children"]
+    for article in articles:
+        titles = article["data"]["title"].lower().split(" ")
+        for title in titles:
+            if title in wd:
+                wd[title] += 1
+    if response.json()["data"]["after"] is None:
+        sw = sorted(wd.items(), key=lambda t: t[::-1])
+        sw_desc = sorted(sw, key=lambda tup: tup[1], reverse=True)
+        for w in sw_desc:
+            if w[1] > 0:
+                print("{}: {}".format(w[0], w[1] * wd_r[w[0]]))
+        return
+    return get_articles(sub, w, wd, wd_r, response.json()["data"]["after"])
 
 
-def count_words(subreddit, word_list, after=None, hot_dict={}):
-    """Write a recursive function that queries the Reddit API, parses the
-    title of all hot articles, and prints a sorted count of given keywords
-    (case-insensitive, delimited by spaces. Javascript should count as
-    javascript, but java should not).
-    """
-    headers = {'User-Agent': 'DiegoOrejuela'}
-    params = {"limit": 100, 'after': after}
-    response = requests.get("https://www.reddit.com/r/{}/hot/.json".
-                            format(subreddit), headers=headers, params=params)
-
-    if len(hot_dict) == 0:
-        for hot_word in word_list:
-            hot_dict[hot_word] = 0
-
-    if response:
-        after_response = response.json().get("data").get("after")
-        if after_response:
-            count_words(subreddit, word_list,
-                        after=after_response, hot_dict=hot_dict)
-            hot_dict_fill(response, word_list, hot_dict, after)
-            return(hot_dict)
+def count_words(subreddit, word_list):
+    """ Count words """
+    w_d = {}
+    w_d_r = {}
+    word_list = [word.lower() for word in word_list]
+    for w in word_list:
+        if w not in w_d:
+            w_d_r[w] = 1
+            w_d[w] = 0
         else:
-            hot_dict_fill(response, word_list, hot_dict, after)
-            return(hot_dict)
-    else:
-        return(None)
+            w_d_r[w] += 1
+    get_articles(subreddit, word_list, w_d, w_d_r)
